@@ -3,17 +3,16 @@ import React, { useState } from 'react';
 import Allitems from './Allitems';
 import CreateScreen from './CreateScreens';
 
-const data = [
-  { id: 1, name: 'wheat', stock: 6, unit: 'KG' },
-  { id: 2, name: 'Rice', stock: 45, unit: 'KG' },
-  { id: 3, name: 'Oats', stock: 33, unit: 'KG' },
-  { id: 4, name: 'Corn', stock: 16, unit: 'KG' },
-  { id: 5, name: 'Pulse', stock: 25, unit: 'KG' },
-  { id: 6, name: 'Basmati Rice', stock: 16, unit: 'KG' },
-  { id: 7, name: 'Lentils', stock: 13, unit: 'KG' },
-];
-
 const HomeScreen = () => {
+  const [data, setdata] = useState([
+    { id: 1, name: 'wheat', stock: 6, unit: 'KG' },
+    { id: 2, name: 'Rice', stock: 45, unit: 'KG' },
+    { id: 3, name: 'Oats', stock: 33, unit: 'KG' },
+    { id: 4, name: 'Corn', stock: 16, unit: 'KG' },
+    { id: 5, name: 'Pulse', stock: 25, unit: 'KG' },
+    { id: 6, name: 'Basmati Rice', stock: 16, unit: 'KG' },
+    { id: 7, name: 'Lentils', stock: 13, unit: 'KG' },
+  ]);
   const [view, setView] = useState(0);
   return (
     <View style={styles.conatiner}>
@@ -57,7 +56,7 @@ const HomeScreen = () => {
       {/* pasing proops  */}
       {view === 1 && <Allitems data={data.filter(item => item.stock < 20)} />}
       {/* filter use for filter items from all items */}
-      {view === 2 && <CreateScreen />}
+      {view === 2 && <CreateScreen data={data} setdata={setdata}/>}
     </View>
   );
 };
