@@ -7,9 +7,10 @@ const data = [
   { id: 1, name: 'wheat', stock: 6, unit: 'KG' },
   { id: 2, name: 'Rice', stock: 45, unit: 'KG' },
   { id: 3, name: 'Oats', stock: 33, unit: 'KG' },
-  { id: 4, name: 'Corn', stock: 64, unit: 'KG' },
+  { id: 4, name: 'Corn', stock: 16, unit: 'KG' },
   { id: 5, name: 'Pulse', stock: 25, unit: 'KG' },
-  { id: 6, name: 'Basmati Rice', stock: 29, unit: 'KG' },
+  { id: 6, name: 'Basmati Rice', stock: 16, unit: 'KG' },
+  { id: 7, name: 'Lentils', stock: 13, unit: 'KG' },
 ];
 
 const HomeScreen = () => {
@@ -21,7 +22,7 @@ const HomeScreen = () => {
         <Pressable
           style={[
             styles.button,
-            view === 0 ? { backgroundColor: 'green' } : null,
+            view === 0 ? { backgroundColor: '#c2b156ff' } : null,
           ]}
           onPress={() => setView(0)}
         >
@@ -32,7 +33,7 @@ const HomeScreen = () => {
         <Pressable
           style={[
             styles.button,
-            view === 1 ? { backgroundColor: 'green' } : null,
+            view === 1 ? { backgroundColor: '#c2b156ff' } : null,
           ]}
           onPress={() => setView(1)}
         >
@@ -43,7 +44,7 @@ const HomeScreen = () => {
         <Pressable
           style={[
             styles.button,
-            view === 2 ? { backgroundColor: 'green' } : null,
+            view === 2 ? { backgroundColor: '#c2b156ff' } : null,
           ]}
           onPress={() => setView(2)}
         >
@@ -54,7 +55,8 @@ const HomeScreen = () => {
       </View>
       {view === 0 && <Allitems data={data} />}
       {/* pasing proops  */}
-      {view === 1 && <Allitems />}
+      {view === 1 && <Allitems data={data.filter(item => item.stock < 20)} />}
+      {/* filter use for filter items from all items */}
       {view === 2 && <CreateScreen />}
     </View>
   );
@@ -83,11 +85,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 14,
     borderRadius: 50,
-    borderColor: '#1c3d1cff',
+    borderColor: '#c2b156ff',
     borderWidth: 1,
   },
   btntxt: {
-    color: '#848a0fff',
+    color: '#c2b156ff',
     fontSize: 14,
   },
 });
