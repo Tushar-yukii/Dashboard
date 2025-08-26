@@ -56,7 +56,7 @@ const HomeScreen = () => {
       {/* pasing proops  */}
       {view === 1 && <Allitems data={data.filter(item => item.stock < 20)} />}
       {/* filter use for filter items from all items */}
-      {view === 2 && <CreateScreen data={data} setdata={setdata}/>}
+      {view === 2 && <CreateScreen data={data} setdata={setdata} />}
     </View>
   );
 };

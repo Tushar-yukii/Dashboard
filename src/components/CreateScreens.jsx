@@ -11,8 +11,8 @@ import React, { useState } from 'react';
 const CreateScreens = ({ data, setdata }) => {
   const [itemName, setitemName] = useState('');
   const [stockAmt, setstockAmt] = useState('');
-  const [isEdit, setisEdit] = useState(false)
-
+  const [isEdit, setisEdit] = useState(false);
+  const [editItemId, seteditItemId] = useState(null);
 
   const AddHandler = () => {
     const newItem = {
@@ -30,9 +30,21 @@ const CreateScreens = ({ data, setdata }) => {
     setdata(data.filter(item => item.id !== id));
   };
 
-  const editItemHandler = () =>{
-    
-  }
+  const editItemHandler = item => {
+    setisEdit(true);
+    setitemName(item.name);
+    seteditItemId(item.id);
+  };
+
+  const updateItemHnadler = () => {
+    setdata(
+      data.map(item =>
+        item.id === editItemId
+          ? { ...item, name: itemName, stock: stockAmt }
+          : item,
+      ),
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -52,8 +64,13 @@ const CreateScreens = ({ data, setdata }) => {
         onChangeText={item => setstockAmt(item)}
       />
 
-      <Pressable style={styles.addButton} onPress={() => AddHandler()}>
-        <Text style={styles.textBtn}>ADD ITEM IN STOCK</Text>
+      <Pressable
+        style={styles.addButton}
+        onPress={() => (isEdit ? updateItemHnadler() : AddHandler())}
+      >
+        <Text style={styles.textBtn}>
+          {isEdit ? 'EDIT ITEM IN STOCK' : 'ADD ITEM IN STOCK'}
+        </Text>
       </Pressable>
 
       <View style={{ marginTop: 10 }}>
